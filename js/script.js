@@ -150,6 +150,85 @@ document.addEventListener('DOMContentLoaded', function() {
     // Uncomment to enable typing animation
     // setTimeout(typeWriter, 1000);
     
+    // Email link feedback functionality
+    function handleEmailClick(event) {
+        const email = 'mshelizaelijah@yahoo.com';
+        const subject = 'Inquiry about IT Support Position';
+        const body = 'Hello Elijah,%0D%0A%0D%0AI am interested in discussing potential opportunities.%0D%0A%0D%0ABest regards,';
+        
+        // Enhanced mailto link with subject and body
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+        
+        // Try to open email client
+        window.location.href = mailtoLink;
+        
+        // Show user feedback
+        const originalText = event.target.textContent || event.target.innerHTML;
+        const targetElement = event.target.closest('a');
+        
+        // Provide visual feedback
+        if (targetElement.classList.contains('btn')) {
+            // For buttons, change text temporarily
+            targetElement.innerHTML = '<i class="fas fa-check"></i> Opening Email...';
+            setTimeout(() => {
+                targetElement.innerHTML = originalText;
+            }, 2000);
+        } else {
+            // For regular links, show a tooltip-style message
+            showEmailTooltip(targetElement, 'Opening email client...');
+        }
+        
+        // Fallback: Copy email to clipboard after delay
+        setTimeout(() => {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(email).then(() => {
+                    if (targetElement.classList.contains('btn')) {
+                        targetElement.innerHTML = '<i class="fas fa-copy"></i> Email Copied!';
+                        setTimeout(() => {
+                            targetElement.innerHTML = originalText;
+                        }, 2000);
+                    } else {
+                        showEmailTooltip(targetElement, 'Email copied to clipboard!');
+                    }
+                }).catch(() => {
+                    // If clipboard fails, show manual copy option
+                    showEmailFallback(email);
+                });
+            } else {
+                showEmailFallback(email);
+            }
+        }, 1500);
+        
+        event.preventDefault();
+    }
+    
+    function showEmailTooltip(element, message) {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'email-tooltip';
+        tooltip.textContent = message;
+        
+        document.body.appendChild(tooltip);
+        
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = rect.left + 'px';
+        tooltip.style.top = (rect.bottom + 5) + 'px';
+        
+        setTimeout(() => {
+            tooltip.remove();
+        }, 3000);
+    }
+    
+    function showEmailFallback(email) {
+        const fallbackMsg = `Please copy this email address: ${email}`;
+        alert(fallbackMsg);
+    }
+    
+    // Add event listeners to all email links
+    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+    emailLinks.forEach(link => {
+        link.addEventListener('click', handleEmailClick);
+    });
+    
     // Initialize the page
     updateActiveNav();
 });

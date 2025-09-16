@@ -283,6 +283,37 @@ img { max-width: 100%; display: block; }
 .footer-links { display: flex; gap: 0.75rem; }
 .footer a { color: var(--muted); text-decoration: none; }
 
+/* Email Feedback Tooltips */
+.email-tooltip {
+  position: fixed;
+  background: var(--text);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: emailTooltipFade 3s ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes emailTooltipFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  20% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Enhanced button states for email feedback */
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(2, 8, 23, 0.2);
+}
+
+.contact-link:active {
+  transform: scale(0.98);
+}
+
 /* Utilities */
 .hidden { display: none; }
 .show { display: block; }
