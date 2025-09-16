@@ -103,17 +103,24 @@ img { max-width: 100%; display: block; }
 .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(2,8,23,0.08); }
 
 .hero-image { display: flex; justify-content: center; }
-.profile-placeholder {
-  width: 240px; height: 240px; border-radius: 9999px; background: var(--surface);
-  border: 4px solid #e2e8f0; color: #94a3b8; display: grid; place-content: center; gap: 0.5rem;
+.profile-photo {
+  width: 240px; height: 240px; border-radius: 50%;
+  object-fit: cover; object-position: center;
+  border: 4px solid #e2e8f0;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.profile-placeholder i { font-size: 3rem; }
+.profile-photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(2, 8, 23, 0.15);
+}
 
 .scroll-indicator { text-align: center; margin-top: 2rem; color: #94a3b8; }
 
 @media (max-width: 799px) {
   .hero-container { grid-template-columns: 1fr; }
   .hero { padding-top: 5rem; }
+  .profile-photo { width: 200px; height: 200px; }
 }
 
 /* About */
