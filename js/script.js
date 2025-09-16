@@ -62,48 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Contact form handling
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // Simple form validation
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-            
-            // Email validation
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call delay
-            setTimeout(() => {
-                alert('Thank you for your message! I\'ll get back to you soon.');
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-    }
     
     // Add scroll-triggered animations
     function addScrollAnimations() {
