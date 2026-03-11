@@ -48,6 +48,9 @@
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -59,6 +62,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div id="particles-js"></div>
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-name animate-up">Elijah Msheliza</h1>
@@ -68,8 +72,8 @@
                     troubleshooting,
                     and networking. Google IT Support Certified. Currently pursuing CompTIA A+.</p>
                 <div class="hero-cta animate-up">
-                    <a href="assets/Resume_IT.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Download Resume
+                    <a href="assets/Resume_IT.pdf" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> View Resume
                     </a>
                     <a href="https://linkedin.com/in/elijah-msheliza" class="btn btn-secondary" target="_blank">
                         <i class="fab fa-linkedin"></i> LinkedIn
@@ -306,16 +310,15 @@
             <h2 class="section-title">Experience & Education</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">Jun 2024 - Aug 2024</div>
+                    <div class="timeline-date">Jan 2024 - Apr 2024</div>
                     <div class="timeline-content">
-                        <h3>Community Tech Support Volunteer</h3>
-                        <h4>North York Senior's Centre</h4>
+                        <h3>Google IT Support Professional Certificate</h3>
+                        <h4>Coursera / Google</h4>
                         <ul>
-                            <li>Assisted 30+ seniors with email setup, device configuration, and internet connectivity
-                                issues</li>
-                            <li>Practiced patience in explaining technical steps clearly, earning 90% positive feedback
-                            </li>
-                            <li>Developed simple visual troubleshooting guides that cut return visits in half</li>
+                            <li>Completed comprehensive training covering troubleshooting, customer service, networking, operating systems, system administration, and security.</li>
+                            <li>Gained hands-on experience evaluating and installing operating systems, diagnosing connectivity issues, and managing software applications.</li>
+                            <li>Learned best practices for creating and applying security policies for users and systems.</li>
+                            <li>Developed a strong foundation in IT support to effectively assist end-users in a corporate environment.</li>
                         </ul>
                     </div>
                 </div>
@@ -431,7 +434,7 @@
             <div class="footer-content">
                 <p>&copy; 2024 Elijah Msheliza. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="assets/Resume_IT.pdf" download><i class="fas fa-file-alt"></i> Resume</a>
+                    <a href="assets/Resume_IT.pdf" target="_blank"><i class="fas fa-file-alt"></i> Resume</a>
                     <a href="https://linkedin.com/in/elijah-msheliza" target="_blank"><i class="fab fa-linkedin"></i>
                         LinkedIn</a>
                     <a href="mailto:mshelizaelijah@yahoo.com"><i class="fas fa-envelope"></i> Email</a>
@@ -441,6 +444,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 

@@ -152,29 +152,28 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Email link feedback functionality
     function handleEmailClick(event) {
+        event.preventDefault();
         const email = 'mshelizaelijah@yahoo.com';
         const subject = 'Inquiry about IT Support Position';
         const body = 'Hello Elijah,%0D%0A%0D%0AI am interested in discussing potential opportunities.%0D%0A%0D%0ABest regards,';
         
-        // Enhanced mailto link with subject and body
-        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         
         // Try to open email client
         window.location.href = mailtoLink;
         
-        // Show user feedback
-        const originalText = event.target.textContent || event.target.innerHTML;
         const targetElement = event.target.closest('a');
+        if (!targetElement) return;
+
+        const originalHTML = targetElement.innerHTML;
         
         // Provide visual feedback
         if (targetElement.classList.contains('btn')) {
-            // For buttons, change text temporarily
             targetElement.innerHTML = '<i class="fas fa-check"></i> Opening Email...';
             setTimeout(() => {
-                targetElement.innerHTML = originalText;
+                targetElement.innerHTML = originalHTML;
             }, 2000);
         } else {
-            // For regular links, show a tooltip-style message
             showEmailTooltip(targetElement, 'Opening email client...');
         }
         
@@ -185,24 +184,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (targetElement.classList.contains('btn')) {
                         targetElement.innerHTML = '<i class="fas fa-copy"></i> Email Copied!';
                         setTimeout(() => {
-                            targetElement.innerHTML = originalText;
+                            targetElement.innerHTML = originalHTML;
                         }, 2000);
                     } else {
                         showEmailTooltip(targetElement, 'Email copied to clipboard!');
                     }
                 }).catch(() => {
-                    // If clipboard fails, show manual copy option
-                    showEmailFallback(email);
+                    // Do nothing on failure to avoid annoying alerts
                 });
-            } else {
-                showEmailFallback(email);
             }
         }, 1500);
-        
-        event.preventDefault();
     }
     
     function showEmailTooltip(element, message) {
+        // Remove old tooltip if exists
+        const oldTooltip = document.querySelector('.email-tooltip');
+        if (oldTooltip) oldTooltip.remove();
+
         const tooltip = document.createElement('div');
         tooltip.className = 'email-tooltip';
         tooltip.textContent = message;
@@ -211,16 +209,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const rect = element.getBoundingClientRect();
         tooltip.style.left = rect.left + 'px';
-        tooltip.style.top = (rect.bottom + 5) + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+        
+        // Trigger reflow
+        void tooltip.offsetWidth;
+        tooltip.classList.add('show');
         
         setTimeout(() => {
-            tooltip.remove();
-        }, 3000);
-    }
-    
-    function showEmailFallback(email) {
-        const fallbackMsg = `Please copy this email address: ${email}`;
-        alert(fallbackMsg);
+            tooltip.classList.remove('show');
+            setTimeout(() => tooltip.remove(), 300);
+        }, 2500);
     }
     
     // Add event listeners to all email links
@@ -228,6 +226,81 @@ document.addEventListener('DOMContentLoaded', function() {
     emailLinks.forEach(link => {
         link.addEventListener('click', handleEmailClick);
     });
+    
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const rootElement = document.documentElement;
+    const themeIcon = themeToggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        rootElement.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Function to update particles color based on theme
+    function updateParticlesConfig(isDark) {
+        if (typeof pJSDom !== 'undefined' && pJSDom.length > 0) {
+            const linesColor = isDark ? '#38bdf8' : '#94a3b8';
+            const particlesColor = isDark ? ['#38bdf8', '#2dd4bf', '#64748b'] : ['#0ea5e9', '#14b8a6', '#94a3b8'];
+            
+            pJSDom[0].pJS.particles.line_linked.color = linesColor;
+            pJSDom[0].pJS.particles.color.value = particlesColor;
+            pJSDom[0].pJS.fn.particlesRefresh();
+        }
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const isDarkNow = !rootElement.hasAttribute('data-theme');
+        if (!isDarkNow) {
+            rootElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        } else {
+            rootElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        updateParticlesConfig(isDarkNow);
+    });
+
+    // Initialize Particles.js
+    if (typeof particlesJS !== 'undefined') {
+        const isDark = rootElement.hasAttribute('data-theme');
+        const linesColor = isDark ? '#38bdf8' : '#94a3b8';
+        const particlesColor = isDark ? ['#38bdf8', '#2dd4bf', '#64748b'] : ['#0ea5e9', '#14b8a6', '#94a3b8'];
+
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": particlesColor },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": linesColor,
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "window",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } },
+                    "push": { "particles_nb": 3 }
+                }
+            },
+            "retina_detect": true
+        });
+    }
     
     // Initialize the page
     updateActiveNav();
