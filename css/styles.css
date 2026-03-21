@@ -236,6 +236,55 @@ img { max-width: 100%; display: block; }
 .timeline-content h3 { margin: 0 0 0.25rem; }
 .timeline-content h4 { margin: 0 0 0.5rem; color: var(--muted); font-weight: 600; }
 
+/* Certifications */
+.certifications { padding: 3rem 0; background: var(--skills-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.cert-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(2,8,23,0.08); border-color: var(--primary); }
+.cert-card--inprogress { opacity: 0.82; }
+.cert-badge {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.cert-info { flex: 1; }
+.cert-info h3 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.cert-issuer { margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+.cert-desc { margin: 0 0 1rem; font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+.cert-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+.cert-badge-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(14,165,233,0.1); color: var(--primary);
+  padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+}
+
+@media (max-width: 799px) { .cert-grid { grid-template-columns: 1fr; } }
+
+/* Timeline cert link */
+.timeline-cert-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+.timeline-cert-link:hover { color: var(--accent); text-decoration: underline; }
+
 /* Contact */
 .contact { padding: 3rem 0; background: linear-gradient(135deg, var(--contact-bg-top) 0%, var(--contact-bg-bottom) 100%); }
 
