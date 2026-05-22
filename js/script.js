@@ -6,9 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('nav-menu');
     
     // Mobile navigation toggle
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-    });
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            const isOpen = navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active', isOpen);
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+            navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        });
+    }
     
     // Smooth scroll for navigation links
     navLinks.forEach(link => {
@@ -25,7 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Close mobile menu after click
-            navMenu.classList.remove('active');
+            if (navMenu && navToggle) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
         });
     });
     
@@ -62,35 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    
-    // Add scroll-triggered animations
-    function addScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements that should animate in
-        const animatedElements = document.querySelectorAll('.project-card, .skill-category, .timeline-item, .highlight-item');
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    }
-    
-    // Initialize animations
-    addScrollAnimations();
     
     // Scroll indicator animation
     const scrollIndicator = document.querySelector('.scroll-indicator');
@@ -155,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const email = 'mshelizaelijah@yahoo.com';
         const subject = 'Inquiry about IT Support Position';
-        const body = 'Hello Elijah,%0D%0A%0D%0AI am interested in discussing potential opportunities.%0D%0A%0D%0ABest regards,';
+        const body = 'Hello Elijah,\n\nI am interested in discussing potential opportunities.\n\nBest regards,';
         
         const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         
@@ -231,12 +212,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const rootElement = document.documentElement;
     const themeIcon = themeToggle.querySelector('i');
+    function syncThemeButton() {
+        const isDark = rootElement.hasAttribute('data-theme');
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        themeIcon.classList.toggle('fa-sun', isDark);
+        themeIcon.classList.toggle('fa-moon', !isDark);
+    }
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         rootElement.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
     }
+    syncThemeButton();
 
     // Function to update particles color based on theme
     function updateParticlesConfig(isDark) {
@@ -251,17 +238,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     themeToggle.addEventListener('click', () => {
-        const isDarkNow = !rootElement.hasAttribute('data-theme');
-        if (!isDarkNow) {
-            rootElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
-        } else {
+        const shouldUseDark = !rootElement.hasAttribute('data-theme');
+        if (shouldUseDark) {
             rootElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            rootElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
         }
-        updateParticlesConfig(isDarkNow);
+        syncThemeButton();
+        updateParticlesConfig(shouldUseDark);
     });
 
     // Initialize Particles.js
@@ -305,42 +291,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the page
     updateActiveNav();
 });
-
-// Add mobile menu styles dynamically
-const style = document.createElement('style');
-style.textContent = `
-    @media (max-width: 799px) {
-        .nav-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: saturate(180%) blur(8px);
-            border-bottom: 1px solid #e2e8f0;
-            flex-direction: column;
-            padding: 1rem;
-            transform: translateY(-100%);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-menu.active {
-            display: flex;
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .nav-link {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        
-        .nav-link:last-child {
-            border-bottom: none;
-        }
-    }
-`;
-document.head.appendChild(style);

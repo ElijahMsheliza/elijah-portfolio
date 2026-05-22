@@ -17,13 +17,8 @@
     <meta property="og:title" content="Elijah Msheliza - IT Support Professional">
     <meta property="og:description" content="Recent BA in Information Technology | IT Support & Networking Enthusiast">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=20260522">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,15 +44,15 @@
                 <a href="#certifications" class="nav-link">Certifications</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#contact" class="nav-link">Contact</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="nav-menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -67,16 +62,21 @@
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-name animate-up">Elijah Msheliza</h1>
-                <h2 class="hero-title animate-up">Recent BA in Information Technology | IT Support & Networking
-                    Enthusiast</h2>
-                <p class="hero-tagline animate-up">Detail-oriented IT professional skilled in help desk support,
-                    troubleshooting,
-                    and networking. Google IT Support Certified. Currently pursuing CompTIA A+.</p>
+                <h2 class="hero-title animate-up">Entry-Level IT Support Professional | Help Desk, Windows & Networking</h2>
+                <p class="hero-tagline animate-up">Google IT Support certified and CompTIA A+ focused, with hands-on practice in ticket handling, Active Directory basics, Windows troubleshooting, remote support, and customer-first technical communication.</p>
+                <div class="hero-proof animate-up" aria-label="Career highlights">
+                    <span><i class="fas fa-headset"></i> Help desk ready</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Toronto / Remote</span>
+                    <span><i class="fas fa-certificate"></i> Google IT certified</span>
+                </div>
                 <div class="hero-cta animate-up">
-                    <a href="assets/Resume_IT.pdf" class="btn btn-primary" target="_blank">
+                    <a href="assets/Resume_IT.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                         <i class="fas fa-external-link-alt"></i> View Resume
                     </a>
-                    <a href="https://linkedin.com/in/elijah-msheliza" class="btn btn-secondary" target="_blank">
+                    <a href="#projects" class="btn btn-secondary">
+                        <i class="fas fa-folder-open"></i> See Projects
+                    </a>
+                    <a href="https://linkedin.com/in/elijah-msheliza" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
                     <a href="mailto:mshelizaelijah@yahoo.com" class="btn btn-secondary">
@@ -206,8 +206,8 @@
                         <span>Tier-1 Support</span>
                     </div>
                     <div class="project-links">
-                        <a href="#it-documentation" class="project-link">
-                            <i class="fas fa-file-alt"></i> View Details
+                        <a href="#support-scenarios" class="project-link">
+                            <i class="fas fa-file-alt"></i> Support Scenario
                         </a>
                     </div>
                 </div>
@@ -243,8 +243,8 @@
                         <span>Technical Support</span>
                     </div>
                     <div class="project-links">
-                        <a href="#remote-support-docs" class="project-link">
-                            <i class="fas fa-file-alt"></i> View Details
+                        <a href="#support-scenarios" class="project-link">
+                            <i class="fas fa-file-alt"></i> Support Scenario
                         </a>
                     </div>
                 </div>
@@ -262,8 +262,8 @@
                         <span>Network Troubleshooting</span>
                     </div>
                     <div class="project-links">
-                        <a href="#troubleshooting-docs" class="project-link">
-                            <i class="fas fa-file-alt"></i> View Details
+                        <a href="#support-scenarios" class="project-link">
+                            <i class="fas fa-file-alt"></i> Support Scenario
                         </a>
                     </div>
                 </div>
@@ -280,14 +280,38 @@
                         <span>JavaScript</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/msheliza" class="project-link" target="_blank">
+                        <a href="https://github.com/msheliza" class="project-link" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-github"></i> GitHub Profile
                         </a>
-                        <a href="#" class="project-link">
+                        <span class="project-link">
                             <i class="fas fa-external-link-alt"></i> You're Here!
-                        </a>
+                        </span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Scenarios Section -->
+    <section id="support-scenarios" class="support-scenarios">
+        <div class="container">
+            <h2 class="section-title">Support Scenarios I Can Walk Through</h2>
+            <div class="scenario-grid">
+                <article class="scenario-card">
+                    <i class="fas fa-key"></i>
+                    <h3>Password & MFA Reset</h3>
+                    <p>Verify the user, reset credentials, confirm MFA setup, document the ticket, and share prevention steps in plain language.</p>
+                </article>
+                <article class="scenario-card">
+                    <i class="fas fa-wifi"></i>
+                    <h3>Connectivity Troubleshooting</h3>
+                    <p>Check device status, Wi-Fi/VPN symptoms, IP and DNS basics, then escalate with clear notes when the issue needs higher-tier support.</p>
+                </article>
+                <article class="scenario-card">
+                    <i class="fas fa-laptop-medical"></i>
+                    <h3>Windows Workstation Support</h3>
+                    <p>Gather symptoms, reproduce the issue, use built-in tools, apply a fix, and record the resolution for future knowledge base use.</p>
+                </article>
             </div>
         </div>
     </section>
@@ -306,10 +330,10 @@
                         <p class="cert-issuer">Issued by Google via Coursera &bull; Jan 2024 – Apr 2024</p>
                         <p class="cert-desc">A comprehensive, 5-course program covering troubleshooting, networking, operating systems, system administration, and IT security — equivalent to ~6 months of on-the-job training.</p>
                         <div class="cert-actions">
-                            <a href="assets/Coursera GM8NMHV6N7YR.pdf" class="btn btn-primary" target="_blank">
+                            <a href="assets/Coursera GM8NMHV6N7YR.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                                 <i class="fas fa-certificate"></i> View Certificate
                             </a>
-                            <a href="https://www.coursera.org/verify/professional-cert/GM8NMHV6N7YR" class="btn btn-secondary" target="_blank">
+                            <a href="https://www.coursera.org/verify/professional-cert/GM8NMHV6N7YR" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                                 <i class="fas fa-external-link-alt"></i> Verify Online
                             </a>
                         </div>
@@ -349,7 +373,7 @@
                             <li>Learned best practices for creating and applying security policies for users and systems.</li>
                             <li>Developed a strong foundation in IT support to effectively assist end-users in a corporate environment.</li>
                         </ul>
-                        <a href="assets/Coursera GM8NMHV6N7YR.pdf" class="timeline-cert-link" target="_blank">
+                        <a href="assets/Coursera GM8NMHV6N7YR.pdf" class="timeline-cert-link" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -439,7 +463,7 @@
                     </div>
                     <div class="contact-info">
                         <h4>LinkedIn</h4>
-                        <a href="https://linkedin.com/in/elijah-msheliza" target="_blank" class="contact-link">Connect
+                        <a href="https://linkedin.com/in/elijah-msheliza" target="_blank" rel="noopener noreferrer" class="contact-link">Connect
                             with me</a>
                         <p class="contact-desc">Professional networking</p>
                     </div>
@@ -463,10 +487,10 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 Elijah Msheliza. All rights reserved.</p>
+                <p>&copy; 2026 Elijah Msheliza. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="assets/Resume_IT.pdf" target="_blank"><i class="fas fa-file-alt"></i> Resume</a>
-                    <a href="https://linkedin.com/in/elijah-msheliza" target="_blank"><i class="fab fa-linkedin"></i>
+                    <a href="assets/Resume_IT.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> Resume</a>
+                    <a href="https://linkedin.com/in/elijah-msheliza" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i>
                         LinkedIn</a>
                     <a href="mailto:mshelizaelijah@yahoo.com"><i class="fas fa-envelope"></i> Email</a>
                 </div>
@@ -476,7 +500,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/script.js?v=20260522b"></script>
 </body>
 
 </html>
